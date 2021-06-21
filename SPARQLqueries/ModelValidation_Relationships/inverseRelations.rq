@@ -1,0 +1,33 @@
+# given a list of types T_1, ..., T_n, select all the triples ?s ?p ?o
+# where ?s is of type T_i (for 1 <= i <= n) and
+# the inverse triple does not exist.
+
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+SELECT
+?type
+?subject
+?predicate
+?object
+?inversePredicate
+WHERE{
+  # specify the types of subjects to consider
+  # (suppose we consider exactly three types)
+  VALUES {
+    :type1
+    :type2
+    :type3
+  }
+
+  # define the inverse predicate
+  ?inversePredicate owl:inverseOf ?predicate .
+
+  # define the subject to be of the right type
+  ?subject
+            a ?type ;
+  # define the triple about which we check whether the inverse triple exists
+            ?predicate  ?object ;
+            .
+  # eliminate the triples for which the inverse triple exists
+  FILTER NOT EXISTS { ?object ?inversePredicate ?subject . }
+}
