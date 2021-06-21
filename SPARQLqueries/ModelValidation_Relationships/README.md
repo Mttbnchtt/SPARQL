@@ -1,5 +1,5 @@
 # RELATIONS
-This folder contins queries to check whether the relations in a model are as desired.
+This folder contains queries to check whether the relations in a model are as desired.
 
 ## INVERSE RELATIONS
 
