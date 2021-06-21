@@ -1,0 +1,23 @@
+# given the conditions of inverseRelations_bySubjectType_SELECT.rq,
+# insert the missing inverse triples.
+
+
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+INSERT
+{
+  ?object ?inversePredicate ?subject .
+}
+WHERE{
+  VALUES {
+    :type1
+    :type2
+    :type3
+  }
+  ?inversePredicate owl:inverseOf ?predicate .
+  ?subject
+            a ?type ;
+            ?predicate  ?object ;
+            .
+  FILTER NOT EXISTS { ?object ?inversePredicate ?subject . }
+}

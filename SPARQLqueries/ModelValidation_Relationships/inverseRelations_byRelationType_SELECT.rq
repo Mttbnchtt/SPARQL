@@ -1,0 +1,31 @@
+# given a class of relations, select all the triples ?s ?p ?o
+# where ?p belongs to the given class and
+# the inverse triple does not exist.
+
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT
+?type
+?subject
+?predicate
+?object
+?inversePredicate
+WHERE{
+
+  # define the class of relations to considers
+  # in this example, I suppose that the relations are sub-properties of skos:related
+  ?predicate rdfs:subPropertyOf skos:related .
+
+  # define the inverse predicate
+  ?inversePredicate owl:inverseOf ?predicate .
+
+  # define the subject to be of the right type
+  ?subject
+            a ?type ;
+  # define the triple about which we check whether the inverse triple exists
+            ?predicate  ?object ;
+            .
+  # eliminate the triples for which the inverse triple exists
+  FILTER NOT EXISTS { ?object ?inversePredicate ?subject . }
+}
