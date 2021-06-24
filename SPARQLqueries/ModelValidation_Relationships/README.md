@@ -21,3 +21,5 @@ Given the conditions of the query inverseRelations_bySubjectType_SELECT.rq, this
 ## SYMMETRIC RELATIONS
 A binary relation R is symmetric if and only if, for every x and y, xRy if and only if yRx.
 
+### symmetricRelations_SELECT.rq
+The query checks whether a triple { ?s ?p ?o } exists such that ?p is a owl:SymmetricRelations and there is no inverse triple { ?o ?p ?s }.
