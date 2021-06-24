@@ -1,0 +1,9 @@
+# find the triples with a symmetric relation that have no inverse triple
+
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT * WHERE{
+  ?predicate  a   owl:SymmetricProperty .
+  ?subject  ?predicate  ?object .
+  FILTER NOT EXISTS { ?object ?predicate  ?subject . }
+}
